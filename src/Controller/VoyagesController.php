@@ -26,7 +26,7 @@ class VoyagesController extends AbstractController{
      */
     public function index(): Response{
         $visites = $this->repository->findAllOrderBy('datecreation', 'DESC');
-       return $this->render("pages/voyages.html.twig", [
+        return $this->render("pages/voyages.html.twig", [
            'visites' => $visites
        ]); 
     }
@@ -72,4 +72,5 @@ class VoyagesController extends AbstractController{
             'visite' => $visite
         ]);
     }
+    
 }

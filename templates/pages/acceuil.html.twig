@@ -1,5 +1,46 @@
 {% extends "basefront.html.twig" %}
 
 {% block body %}
-<h1>Page d'acceuil</h1>
+<h1 class="mt-3 mb-3">Bienvenue sur mon site personnel de présentation de mes voyages.</h1>
+<p class='mb-0'>Dans la partie <a href="{{ path('voyages') }}">Voyages</a>, vous pouvez voir la liste des visites que j'ai faites dans différentes villes.</p>
+<p class='mb-0'>A chaque fois j'ai précisé la ville visitée, le pays, j'ai mis une note (entre 0 et 20) et il y a aussi la date de la visite</p>
+<p class='mb-0'>Vous pouvez trier la liste en fonction des villes, des pays, des notes et des dates, aussi bien dans l'ordre croissant que décroissant</p>
+<p class='mb-0'>Vous pouvez aussi filtrer les visites par rapport à une ville ou un pays</p>
+<p class='mb-0'>En cliquant sur la ville de la visite, vous pourrez avoir plus d'informations dessus</p>
+<p class='mb-0'>Températures minimum et maximum, une description de la visite, les environnements (montagne, mer, désert...) et une photo.</p>
+<p class='mb-0'>Enfin, vous pourrez me contacter avec le formulaire de <a href='{{ path('contact') }}'>Contact</a></p>
+<div>
+    <p class='mt-3 mb-3'>Voici mes 2 derniers voyages: </p>
+    <div class='row'>
+        {% for visite in visites %}
+            <div class='col'>
+                <div class='row'>
+                    <div class='col'>
+                        <img src='{{ app.request.getBasePath()~vich_uploader_asset(visite, 'imageFile') }}' class='card-img-top'>
+                    </div>
+                    <div class='col'>
+                        {{ visite.datecreationstring }}
+                        <a href='{{ path('voyages.showone', {id:visite.id}) }}'><h3>{{ visite.ville }}</h3></a>
+                        {{ visite.pays }}
+                        {% if visite.note >= 10 %}
+                            <p class='text-success mb-0'>
+                                {{ visite.note }}/20
+                            </p>
+                        {% else %}
+                            <p class='text-danger mb-0'>
+                                {{ visite.note }}/20
+                            </p>
+                        {% endif %}
+                        <p class='mt-0'>T° entre {{ visite.tempmin }}° et {{ visite.tempmax }}°</p>
+                        <p class='mt-2 mb-1'><strong>Environnements :</strong></p>
+                        {% for environnement in visite.environnements %}
+                            {{ environnement.nom }}
+                        {% endfor %}
+                    </div>
+                </div>
+
+            </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

@@ -77,6 +77,17 @@ class VisiteRepository extends ServiceEntityRepository
         }
     }
     
+    /**
+     * Retourne les 2 dernières visites enregistrées
+     * @return Visite[]
+     */
+    public function findLastResult(): array{
+        return $this->createQueryBuilder('v')
+                ->orderBy('v.datecreation', 'DESC')
+                ->setMaxResults(2)
+                ->getQuery()
+                ->getResult();
+    }
 
     
 //    /**
