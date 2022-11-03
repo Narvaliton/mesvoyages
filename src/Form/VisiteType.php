@@ -9,6 +9,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -27,7 +28,12 @@ class VisiteType extends AbstractType
                 $options['data']->getDateCreation() != null ? $options['data']->getDateCreation() : new \DateTime(),
                 'label' => 'Date',
             ])
-            ->add('note')
+            ->add('note', IntegerType::class, [
+                'attr' => [
+                    'min' => 0,
+                    'max' =>20
+                ]
+            ])
             ->add('avis')
             ->add('environnements', EntityType::class, [
                 'class' => Environnement::class,
