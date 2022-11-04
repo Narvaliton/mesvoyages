@@ -18,4 +18,6 @@ class VisiteTest extends TestCase {
         $visite->setDatecreation(new \DateTime('2022-04-14'));
         $this->assertEquals('14/04/2022', $visite->getDatecreationString());
     }
+    
+    
 }

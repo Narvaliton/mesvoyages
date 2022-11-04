@@ -37,6 +37,7 @@ class Visite
 
     /**
      * @ORM\Column(type="date", nullable=true)
+     * @Assert\LessThanOrEqual("today UTC")
      */
     private $datecreation;
 
