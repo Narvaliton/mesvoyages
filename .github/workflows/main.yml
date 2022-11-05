@@ -5,15 +5,24 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
     steps:
-    - name: Get latest code
-      uses: actions/checkout@v2
-      
-    - name: Sync files
-      uses: SamKirkland/FTP-Deploy-Action@4.3.0
-      with:
-        server: node183-eu.n0c.com
-        server-dir: /public_html/mesvoyages/
-        port: 21
-        security: loose
-        username: maxcolin@mc-narvaliton.go.yj.fr
-        password: ${{ secrets.ftp_password }}
+      - name: Get latest code
+        uses: actions/checkout@v2
+        
+      - name: Set up node env
+        uses: actions/setup-node@v2.5.1
+        with:
+          node-version: 16.3.2
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --prefer-offline --no-audit
+        
+      - name: Sync files
+        uses: SamKirkland/FTP-Deploy-Action@4.3.0
+        with:
+          server: node183-eu.n0c.com
+          server-dir: /public_html/mesvoyages/
+          port: 21
+          security: loose
+          username: maxcolin@mc-narvaliton.go.yj.fr
+          password: ${{ secrets.ftp_password }}
