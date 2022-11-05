@@ -13,5 +13,7 @@ jobs:
       with:
         server: node183-eu.n0c.com
         server-dir: /public_html/mesvoyages/
+        port: 21
+        security: loose
         username: maxcolin@mc-narvaliton.go.yj.fr
         password: ${{ secrets.ftp_password }}
