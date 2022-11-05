@@ -11,7 +11,7 @@ jobs:
     - name: Sync files
       uses: SamKirkland/FTP-Deploy-Action@4.3.0
       with:
-        server: node183-eu.n0c.com:21
+        server: node183-eu.n0c.com
         server-dir: /public_html/mesvoyages/
         username: maxcolin@mc-narvaliton.go.yj.fr
         password: ${{ secrets.ftp_password }}
